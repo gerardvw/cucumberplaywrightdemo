@@ -1,6 +1,6 @@
 Feature: search
 
-    @phantomjs
+    @chrome
     Scenario Outline: search for t-shirts
     Given homepage is opened
     When I search for <searchterm>
