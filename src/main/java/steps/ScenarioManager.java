@@ -2,6 +2,8 @@ package steps;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -9,6 +11,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ScenarioManager {
 
@@ -63,5 +66,11 @@ public class ScenarioManager {
 
     public static WebDriver getWebdriver() {
         return webdriver;
+    }
+
+    public static WebDriverWait getWebDriverWait() {
+        WebDriverWait webDriverWait = new WebDriverWait(webdriver, 10, 500);
+        webDriverWait.ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
+        return webDriverWait;
     }
 }
