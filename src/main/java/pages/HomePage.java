@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.ScenarioManager;
+import util.Config;
 
 public class HomePage {
 
@@ -41,7 +42,7 @@ public class HomePage {
     }
 
     public void navigate() {
-        webdriver.navigate().to("http://automationpractice.com/index.php");
+        webdriver.navigate().to(Config.getBaseUrl() + "/index.php");
         waitUntilPageIsLoaded();
     }
 

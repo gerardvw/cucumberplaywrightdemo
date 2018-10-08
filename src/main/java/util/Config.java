@@ -31,4 +31,6 @@ public class Config {
     public static Long getSleepInMillis() {
         return Long.parseLong(getProperty("sleepinmillis"));
     }
+
+    public static String getBaseUrl() { return getProperty("baseurl"); }
 }
