@@ -12,6 +12,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import util.Config;
 
 public class ScenarioManager {
 
@@ -69,7 +70,7 @@ public class ScenarioManager {
     }
 
     public static WebDriverWait getWebDriverWait() {
-        WebDriverWait webDriverWait = new WebDriverWait(webdriver, 10, 500);
+        WebDriverWait webDriverWait = new WebDriverWait(webdriver, Config.getTimeoutInSeconds(), Config.getSleepInMillis());
         webDriverWait.ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
         return webDriverWait;
     }
