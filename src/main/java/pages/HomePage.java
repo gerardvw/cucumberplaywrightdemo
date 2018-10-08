@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import steps.ScenarioManager;
+
 import util.Config;
 
 public class HomePage {
@@ -35,9 +35,9 @@ public class HomePage {
     private By searchResultLocator = By.cssSelector("#center_column > h1 > span.heading-counter");
     private By descriptionLocator = By.cssSelector("#center_column > ul > li > div > div > div.center-block.col-xs-4.col-xs-7.col-md-4 > h5 > a");
 
-    public HomePage() {
-        this.webdriver = ScenarioManager.getWebdriver();
-        this.webDriverWait = ScenarioManager.getWebDriverWait();
+    public HomePage(WebDriver webdriver, WebDriverWait webdriverWait) {
+        this.webdriver = webdriver;
+        this.webDriverWait = webdriverWait;
         PageFactory.initElements(this.webdriver, this);
     }
 
