@@ -6,12 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import util.Config;
-
-public class HomePage {
-
-    private WebDriver webdriver;
-    private WebDriverWait webDriverWait;
+public class HomePage extends BasePage {
 
     @FindBy(css = "#search_query_top")
     private WebElement searchQuery;
@@ -36,14 +31,8 @@ public class HomePage {
     private By descriptionLocator = By.cssSelector("#center_column > ul > li > div > div > div.center-block.col-xs-4.col-xs-7.col-md-4 > h5 > a");
 
     public HomePage(WebDriver webdriver, WebDriverWait webdriverWait) {
-        this.webdriver = webdriver;
-        this.webDriverWait = webdriverWait;
-        PageFactory.initElements(this.webdriver, this);
-    }
-
-    public void navigate() {
-        webdriver.navigate().to(Config.getBaseUrl() + "/index.php");
-        waitUntilPageIsLoaded();
+        super(webdriver, webdriverWait);
+        PageFactory.initElements(getWebdriver(), this);
     }
 
     public void searchFor(String searchTerm) {
@@ -71,14 +60,21 @@ public class HomePage {
     }
 
     private void waitUntilResultsInAList() {
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(descriptionLocator));
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(descriptionLocator));
     }
 
     private void waitUntilSearchResultAvailable() {
-        webDriverWait.until(ExpectedConditions.textToBePresentInElementLocated(searchResultLocator, "been found."));
+        getWebDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(searchResultLocator, "been found."));
     }
 
-    private void waitUntilPageIsLoaded() {
-        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(searchQueryLocator));
+    @Override
+    protected void waitUntilPageIsLoaded() {
+        super.waitUntilPageIsLoaded();
+        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(searchQueryLocator));
+    }
+
+    @Override
+    protected String getRelativeUrl() {
+        return "/index.php";
     }
 }

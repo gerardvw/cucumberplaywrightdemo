@@ -3,7 +3,7 @@ Feature: search
     Background:
         Given homepage is opened
 
-    @chrome
+    @chrome @ie
     Scenario Outline: search for t-shirts
     When I search for <searchterm>
     And I choose to view the search results for being viewed in a list
@@ -14,4 +14,6 @@ Feature: search
     Examples:
     | searchterm | description                 | price   | availability |
     | t-shirts   | Faded Short Sleeve T-shirts | $16.51  | In stock     |
+
+
 
