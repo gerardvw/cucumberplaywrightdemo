@@ -7,13 +7,13 @@ public class DriverManagerFactory {
         DriverManager driverManager = null;
 
         switch (type) {
-            case CHROME:
+            case chrome:
                 driverManager = new ChromeDriverManager();
                 break;
-            case IE:
+            case ie:
                 driverManager = new InternetExplorerDriverManager();
                 break;
-            case PHANTOMJS:
+            case phantomjs:
                 driverManager = new PhantomJsDriverManager();
                 break;
             default:

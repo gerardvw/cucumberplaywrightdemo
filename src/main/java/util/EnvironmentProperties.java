@@ -2,16 +2,18 @@ package util;
 
 import java.util.Properties;
 
-public class Config {
+public class EnvironmentProperties {
 
-    private Properties configFile;
+    private Environment environment;
+    private Properties properties;
 
-    private static Config instance;
+    private static EnvironmentProperties instance;
 
-    private Config() {
-        configFile = new java.util.Properties();
+    private EnvironmentProperties() {
+        environment = SystemProperties.getEnvironment();
+        properties = new java.util.Properties();
         try {
-            configFile.load(this.getClass().getClassLoader().getResourceAsStream("config/config.properties"));
+            properties.load(this.getClass().getClassLoader().getResourceAsStream("config/" + environment.name() + ".properties"));
         } catch (Exception eta) {
             eta.printStackTrace();
         }
@@ -19,9 +21,9 @@ public class Config {
 
     private static String getProperty(String key) {
         if (instance == null) {
-            instance = new Config();
+            instance = new EnvironmentProperties();
         }
-        return instance.configFile.getProperty(key);
+        return instance.properties.getProperty(key);
     }
 
     public static Long getTimeoutInSeconds() {

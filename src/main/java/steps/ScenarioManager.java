@@ -6,10 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import util.Config;
-import util.DriverManager;
-import util.DriverManagerFactory;
-import util.DriverType;
+import util.*;
 
 public class ScenarioManager {
 
@@ -19,8 +16,7 @@ public class ScenarioManager {
 
     @Before
     public void beforeScenario() {
-        //TODO: move getProperty to separate class
-        driverType = DriverType.valueOf(System.getProperty("browser").toUpperCase());
+        driverType = SystemProperties.getDriverType();
         driverManager = DriverManagerFactory.getManager(driverType);
         startDriver();
         maximizeWindow();
@@ -44,7 +40,7 @@ public class ScenarioManager {
     }
 
     public static WebDriverWait getWebDriverWait() {
-        WebDriverWait webDriverWait = new WebDriverWait(webdriver, Config.getTimeoutInSeconds(), Config.getSleepInMillis());
+        WebDriverWait webDriverWait = new WebDriverWait(webdriver, EnvironmentProperties.getTimeoutInSeconds(), EnvironmentProperties.getSleepInMillis());
         webDriverWait.ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
         return webDriverWait;
     }

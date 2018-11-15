@@ -2,7 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import util.Config;
+import util.EnvironmentProperties;
 
 public abstract class BasePage {
 
@@ -15,7 +15,7 @@ public abstract class BasePage {
     }
 
     public void navigate() {
-        webdriver.navigate().to(Config.getBaseUrl() + getRelativeUrl());
+        webdriver.navigate().to(EnvironmentProperties.getBaseUrl() + getRelativeUrl());
         waitUntilPageIsLoaded();
     }
 
