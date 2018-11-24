@@ -1,4 +1,6 @@
-package util;
+package util.properties;
+
+import util.Environment;
 
 import java.util.Properties;
 

@@ -1,4 +1,6 @@
-package util;
+package util.drivermanagers;
+
+import util.DriverType;
 
 public class DriverManagerFactory {
 

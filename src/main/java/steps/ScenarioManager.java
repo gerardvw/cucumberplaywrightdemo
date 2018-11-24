@@ -7,6 +7,10 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.*;
+import util.drivermanagers.DriverManager;
+import util.drivermanagers.DriverManagerFactory;
+import util.properties.EnvironmentProperties;
+import util.properties.SystemProperties;
 
 public class ScenarioManager {
 
@@ -22,7 +26,7 @@ public class ScenarioManager {
         maximizeWindow();
     }
 
-    @After("@ie, @chrome, @phantomjs")
+    @After
     public void afterScenario() {
         driverManager.quitDriver();
     }

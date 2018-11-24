@@ -1,4 +1,7 @@
-package util;
+package util.properties;
+
+import util.DriverType;
+import util.Environment;
 
 public class SystemProperties {
 

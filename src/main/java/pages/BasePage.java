@@ -2,7 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import util.EnvironmentProperties;
+import util.properties.EnvironmentProperties;
 
 public abstract class BasePage {
 
