@@ -2,9 +2,7 @@ package util.drivermanagers;
 
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import util.drivermanagers.DriverManager;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 
 import java.io.File;
 
@@ -17,7 +15,7 @@ public class InternetExplorerDriverManager extends DriverManager {
         if (null == driverService) {
             try {
                 driverService = new InternetExplorerDriverService.Builder()
-                        .usingDriverExecutable(new File(".\\src\\main\\resources\\drivers\\IEDriverServer_x64_2.53.1\\IEDriverServer.exe"))
+                        .usingDriverExecutable(new File(".\\src\\main\\resources\\drivers\\IEDriverServer_x64_3.14.0\\IEDriverServer.exe"))
                         .usingAnyFreePort()
                         .build();
                 driverService.start();
@@ -35,16 +33,13 @@ public class InternetExplorerDriverManager extends DriverManager {
 
     @Override
     public void createDriver() {
-        DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+        InternetExplorerOptions options = new InternetExplorerOptions();
+        options.introduceFlakinessByIgnoringSecurityDomains();
+        options.destructivelyEnsureCleanSession();
+        options.requireWindowFocus();
+        options.ignoreZoomSettings();
 
-        capabilities.setCapability(CapabilityType.BROWSER_NAME, "IE");
-        capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-        capabilities.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-        //requireWindowFocus is a workaround for slow typing in textfields with 64 bit driver server
-        //When this is not working anymore switch to 32 bit driver server
-        capabilities.setCapability("requireWindowFocus", true);
-
-        driver = new InternetExplorerDriver(driverService, capabilities);
+        driver = new InternetExplorerDriver(driverService, options);
     }
 
 }

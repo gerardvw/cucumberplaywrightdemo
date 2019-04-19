@@ -31,14 +31,6 @@ public class ScenarioManager {
         driverManager.quitDriver();
     }
 
-    protected void maximizeWindow() {
-        webdriver.manage().window().maximize();
-    }
-
-    protected void startDriver() {
-        webdriver = driverManager.startDriver();
-    }
-
     public static WebDriver getWebdriver() {
         return webdriver;
     }
@@ -47,5 +39,13 @@ public class ScenarioManager {
         WebDriverWait webDriverWait = new WebDriverWait(webdriver, EnvironmentProperties.getTimeoutInSeconds(), EnvironmentProperties.getSleepInMillis());
         webDriverWait.ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
         return webDriverWait;
+    }
+
+    private void maximizeWindow() {
+        webdriver.manage().window().maximize();
+    }
+
+    private void startDriver() {
+        webdriver = driverManager.startDriver();
     }
 }
