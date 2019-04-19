@@ -8,27 +8,24 @@ import java.io.File;
 
 public class PhantomJsDriverManager extends DriverManager {
 
-    private PhantomJSDriverService driverService;
+    private ThreadLocal<PhantomJSDriverService> driverService = new ThreadLocal<>();
 
     @Override
     public void startService() {
-        if (null == driverService) {
-            try {
-                driverService = new PhantomJSDriverService.Builder()
-                        .usingPhantomJSExecutable(new File(".\\src\\main\\resources\\drivers\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe"))
-                        .usingAnyFreePort()
-                        .build();
-                driverService.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            driverService.set(new PhantomJSDriverService.Builder()
+                    .usingPhantomJSExecutable(new File(".\\src\\main\\resources\\drivers\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe"))
+                    .usingAnyFreePort()
+                    .build());
+            driverService.get().start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void stopService() {
-        if (null != driverService)
-            driverService.stop();
+        driverService.get().stop();
     }
 
     @Override
@@ -36,11 +33,8 @@ public class PhantomJsDriverManager extends DriverManager {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setJavascriptEnabled(true);
         caps.setCapability("takesScreenshot", false);
-//        caps.setCapability(
-//                PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-//                ".\\src\\main\\resources\\drivers\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe"
-//        );
-        driver = new PhantomJSDriver(driverService, caps);
+
+        driver.set(new PhantomJSDriver(driverService.get(), caps));
     }
 
 }

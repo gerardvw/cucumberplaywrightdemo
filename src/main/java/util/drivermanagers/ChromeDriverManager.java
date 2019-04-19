@@ -7,32 +7,29 @@ import java.io.File;
 
 public class ChromeDriverManager extends DriverManager {
 
-    private ChromeDriverService driverService;
+    private ThreadLocal<ChromeDriverService> driverService = new ThreadLocal<>();
 
     @Override
     public void startService() {
-        if (null == driverService) {
-            try {
-                driverService = new ChromeDriverService.Builder()
-                        .usingDriverExecutable(new File(".\\src\\main\\resources\\drivers\\chromedriver_win32\\chromedriver.exe"))
-                        .usingAnyFreePort()
-                        .build();
-                driverService.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            driverService.set(new ChromeDriverService.Builder()
+                    .usingDriverExecutable(new File(".\\src\\main\\resources\\drivers\\chromedriver_win32\\chromedriver.exe"))
+                    .usingAnyFreePort()
+                    .build());
+            driverService.get().start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void stopService() {
-        if (null != driverService)
-            driverService.stop();
+        driverService.get().stop();
     }
 
     @Override
     public void createDriver() {
-        driver = new ChromeDriver(driverService);
+        driver.set(new ChromeDriver(driverService.get()));
     }
 
 }

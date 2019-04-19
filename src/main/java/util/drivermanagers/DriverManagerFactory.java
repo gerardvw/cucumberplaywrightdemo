@@ -6,7 +6,7 @@ public class DriverManagerFactory {
 
     public static DriverManager getManager(DriverType type) {
 
-        DriverManager driverManager = null;
+        DriverManager driverManager;
 
         switch (type) {
             case chrome:
@@ -19,7 +19,7 @@ public class DriverManagerFactory {
                 driverManager = new PhantomJsDriverManager();
                 break;
             default:
-                throw new IllegalArgumentException("DriverType not supported (yet)");
+                throw new IllegalArgumentException("DriverType " + type.toString() + " not supported (yet)");
         }
         return driverManager;
 

@@ -4,7 +4,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import util.drivermanagers.DriverManager;
 
 public class HomePage extends BasePage {
 
@@ -30,9 +31,9 @@ public class HomePage extends BasePage {
     private By searchResultLocator = By.cssSelector("#center_column > h1 > span.heading-counter");
     private By descriptionLocator = By.cssSelector("#center_column > ul > li > div > div > div.center-block.col-xs-4.col-xs-7.col-md-4 > h5 > a");
 
-    public HomePage(WebDriver webdriver, WebDriverWait webdriverWait) {
-        super(webdriver, webdriverWait);
-        PageFactory.initElements(getWebdriver(), this);
+    public HomePage() {
+        super();
+        PageFactory.initElements(DriverManager.getWebdriver(), this);
     }
 
     public void searchFor(String searchTerm) {
@@ -60,17 +61,17 @@ public class HomePage extends BasePage {
     }
 
     private void waitUntilResultsInAList() {
-        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(descriptionLocator));
+        DriverManager.getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(descriptionLocator));
     }
 
     private void waitUntilSearchResultAvailable() {
-        getWebDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(searchResultLocator, "been found."));
+        DriverManager.getWebDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(searchResultLocator, "been found."));
     }
 
     @Override
     protected void waitUntilPageIsLoaded() {
         super.waitUntilPageIsLoaded();
-        getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(searchQueryLocator));
+        DriverManager.getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(searchQueryLocator));
     }
 
     @Override

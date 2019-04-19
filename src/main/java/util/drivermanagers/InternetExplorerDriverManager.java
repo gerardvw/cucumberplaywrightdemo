@@ -8,27 +8,24 @@ import java.io.File;
 
 public class InternetExplorerDriverManager extends DriverManager {
 
-    private InternetExplorerDriverService driverService;
+    private ThreadLocal<InternetExplorerDriverService> driverService = new ThreadLocal<>();
 
     @Override
     public void startService() {
-        if (null == driverService) {
-            try {
-                driverService = new InternetExplorerDriverService.Builder()
-                        .usingDriverExecutable(new File(".\\src\\main\\resources\\drivers\\IEDriverServer_x64_3.14.0\\IEDriverServer.exe"))
-                        .usingAnyFreePort()
-                        .build();
-                driverService.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            driverService.set(new InternetExplorerDriverService.Builder()
+                    .usingDriverExecutable(new File(".\\src\\main\\resources\\drivers\\IEDriverServer_x64_3.14.0\\IEDriverServer.exe"))
+                    .usingAnyFreePort()
+                    .build());
+            driverService.get().start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void stopService() {
-        if (null != driverService)
-            driverService.stop();
+        driverService.get().stop();
     }
 
     @Override
@@ -39,7 +36,7 @@ public class InternetExplorerDriverManager extends DriverManager {
         options.requireWindowFocus();
         options.ignoreZoomSettings();
 
-        driver = new InternetExplorerDriver(driverService, options);
+        driver.set(new InternetExplorerDriver(driverService.get(), options));
     }
 
 }

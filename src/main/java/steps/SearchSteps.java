@@ -9,7 +9,7 @@ import pages.HomePage;
 
 public class SearchSteps {
 
-    private HomePage homePage = new HomePage(ScenarioManager.getWebdriver(), ScenarioManager.getWebDriverWait());
+    private HomePage homePage = new HomePage();
 
     @Given("^homepage is opened$")
     public void homepageIsOpened() {
