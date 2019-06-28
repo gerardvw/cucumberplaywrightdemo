@@ -3,6 +3,7 @@ package util.drivermanagers;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.support.ThreadGuard;
 
 import java.io.File;
 
@@ -36,7 +37,7 @@ public class InternetExplorerDriverManager extends DriverManager {
         options.requireWindowFocus();
         options.ignoreZoomSettings();
 
-        driver.set(new InternetExplorerDriver(driverService.get(), options));
+        driver.set(ThreadGuard.protect(new InternetExplorerDriver(driverService.get(), options)));
     }
 
 }

@@ -2,6 +2,7 @@ package util.drivermanagers;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.support.ThreadGuard;
 
 import java.io.File;
 
@@ -29,7 +30,7 @@ public class ChromeDriverManager extends DriverManager {
 
     @Override
     public void createDriver() {
-        driver.set(new ChromeDriver(driverService.get()));
+        driver.set(ThreadGuard.protect(new ChromeDriver(driverService.get())));
     }
 
 }

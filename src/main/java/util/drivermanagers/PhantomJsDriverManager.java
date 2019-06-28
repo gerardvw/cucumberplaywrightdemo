@@ -3,6 +3,7 @@ package util.drivermanagers;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ThreadGuard;
 
 import java.io.File;
 
@@ -34,7 +35,7 @@ public class PhantomJsDriverManager extends DriverManager {
         caps.setJavascriptEnabled(true);
         caps.setCapability("takesScreenshot", false);
 
-        driver.set(new PhantomJSDriver(driverService.get(), caps));
+        driver.set(ThreadGuard.protect(new PhantomJSDriver(driverService.get(), caps)));
     }
 
 }
