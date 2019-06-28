@@ -25,11 +25,11 @@ public abstract class DriverManager {
         stopService();
     }
 
-    public static WebDriver getWebdriver() {
+    public synchronized static WebDriver getWebdriver() {
         return driver.get();
     }
 
-    public static WebDriverWait getWebDriverWait() {
+    public synchronized static WebDriverWait getWebDriverWait() {
         WebDriverWait webDriverWait = new WebDriverWait(DriverManager.getWebdriver(), EnvironmentProperties.getTimeoutInSeconds(), EnvironmentProperties.getSleepInMillis());
         webDriverWait.ignoring(NoSuchElementException.class, StaleElementReferenceException.class);
         return webDriverWait;
