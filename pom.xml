@@ -55,14 +55,14 @@
             <version>3.141.0</version>
         </dependency>
 
-        <!--&lt;!&ndash; fix dependency issue with incompatible selenium versions &ndash;&gt;-->
+        <!-- fix dependency issue with incompatible selenium versions -->
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>phantomjsdriver</artifactId>
             <version>1.4.4</version>
         </dependency>
 
-        <!-- Fix wait-untilexpectedconditions-doesnt-work-any-more-in-selenium 3.xx -->
+        <!-- fix wait-untilexpectedconditions-doesnt-work-any-more-in-selenium 3.xx -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -91,7 +91,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <!-- <version>2.1</version> -->
                 <configuration>
                     <pushChanges>false</pushChanges>
                     <preparationGoals>clean package</preparationGoals>
@@ -108,7 +107,6 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-assembly-plugin</artifactId>
-                        <!--<version>2.2.1</version>-->
                         <configuration>
                             <archive>
                                 <manifest>

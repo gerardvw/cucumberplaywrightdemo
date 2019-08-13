@@ -10,6 +10,7 @@ import pages.HomePage;
 public class SearchSteps {
 
     private HomePage homePage = new HomePage();
+    private int actualItemNumber = -1;
 
     @Given("^homepage is opened$")
     public void homepageIsOpened() {
@@ -26,18 +27,14 @@ public class SearchSteps {
         homePage.selectResultsInAList();
     }
 
-    @Then("^I should see an item with description (.*) and a price of (.*)$")
-    public void iShouldSeeAnItemWithDescriptionDescriptionAndAPriceOfPrice(String expectedDescription, String expectedPrice) {
-        Assert.assertEquals("Description not found.", expectedDescription, homePage.getDescriptionFromList());
-    }
-
-    @And("^this item should be (.*)$")
-    public void thisItemShouldBeInStock(String expectedAvailability) {
-        Assert.assertEquals("Availability not as expected.", expectedAvailability, homePage.getAvailabilityFromList());
+    @Then("^I should see an item with description (.*) and a price of (.*) and availability (In stock|Not in stock)$")
+    public void iShouldSeeAnItemWithDescriptionAndAPriceOf(String expectedDescription, String expectedPrice, String expectedAvailability) {
+        actualItemNumber = homePage.getItemNumberFromSearchResultList(expectedDescription, expectedAvailability, expectedPrice);
+        Assert.assertTrue("Item not found.", actualItemNumber > -1);
     }
 
     @And("^it should be possible to add this item to my cart$")
     public void itShouldBePossibleToAddThisItemToMyCart() {
-        Assert.assertTrue("AddToCart not available.", homePage.addToCartIsAvailable());
+        Assert.assertTrue("AddToCart not available.", homePage.addToCartIsAvailable(actualItemNumber));
     }
 }
