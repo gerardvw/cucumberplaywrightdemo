@@ -30,6 +30,17 @@ public class HomePage extends BasePage {
     private By searchResultItemPriceLocator = By.cssSelector("span[itemprop='price']");
     private By searchResultItemtAddToCartLocator = By.cssSelector("a.button.ajax_add_to_cart_button.btn.btn-default");
 
+    @Override
+    protected void waitUntilPageIsLoaded() {
+        super.waitUntilPageIsLoaded();
+        DriverManager.getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(searchQueryLocator));
+    }
+
+    @Override
+    protected String getRelativeUrl() {
+        return "/index.php";
+    }
+
     public void searchFor(String searchTerm) {
         searchQuery.sendKeys(searchTerm);
         searchButton.click();
@@ -44,25 +55,6 @@ public class HomePage extends BasePage {
 
     public boolean addToCartIsAvailable(int actualItemNumber) {
         return searchResults.get(actualItemNumber).findElement(searchResultItemtAddToCartLocator).isEnabled();
-    }
-
-    private void waitUntilResultsInAList() {
-        DriverManager.getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(searchResultIsListLocator));
-    }
-
-    private void waitUntilSearchResultAvailable() {
-        DriverManager.getWebDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(searchResultLocator, "been found."));
-    }
-
-    @Override
-    protected void waitUntilPageIsLoaded() {
-        super.waitUntilPageIsLoaded();
-        DriverManager.getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(searchQueryLocator));
-    }
-
-    @Override
-    protected String getRelativeUrl() {
-        return "/index.php";
     }
 
     public int getItemNumberFromSearchResultList(String expectedDescription, String expectedAvailability, String expectedPrice) {
@@ -81,5 +73,13 @@ public class HomePage extends BasePage {
             }
         }
         return itemNumber;
+    }
+
+    private void waitUntilResultsInAList() {
+        DriverManager.getWebDriverWait().until(ExpectedConditions.presenceOfElementLocated(searchResultIsListLocator));
+    }
+
+    private void waitUntilSearchResultAvailable() {
+        DriverManager.getWebDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(searchResultLocator, "been found."));
     }
 }
