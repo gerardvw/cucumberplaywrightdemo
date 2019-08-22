@@ -58,6 +58,7 @@ public class HomePage extends BasePage {
     }
 
     public int getItemNumberFromSearchResultList(String expectedDescription, String expectedAvailability, String expectedPrice) {
+        boolean found = false;
         int itemNumber = -1;
 
         for (WebElement item : searchResults) {
@@ -69,10 +70,11 @@ public class HomePage extends BasePage {
             String actualPrice = item.findElement(searchResultItemPriceLocator).getAttribute("innerText").replace("\t","").replace("\n","");
 
             if (actualDescription.equals(expectedDescription) && actualAvailabiliy.equals(expectedAvailability) && actualPrice.equals(expectedPrice)) {
+                found = true;
                 break;
             }
         }
-        return itemNumber;
+        return found ? itemNumber : -1;
     }
 
     private void waitUntilResultsInAList() {
