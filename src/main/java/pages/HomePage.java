@@ -38,7 +38,7 @@ public class HomePage extends BasePage {
 
     @Override
     protected String getRelativeUrl() {
-        return "/index.php";
+        return "";
     }
 
     public void searchFor(String searchTerm) {

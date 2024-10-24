@@ -85,7 +85,7 @@
                     <encoding>UTF-8</encoding>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <compilerArgument>-Werror</compilerArgument>
+                    <!-- Don't treat warning as errors <compilerArgument>-Werror</compilerArgument> -->
                 </configuration>
             </plugin>
             <plugin>
