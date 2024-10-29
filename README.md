@@ -19,9 +19,9 @@ Features and scenarios can be started from your IDE and from commandline
 Running from commandline:
 
 - Parameters needed to start feature/scenario, by -D option:
-   - browser=<chrome or msedge>
-   - headless=<true or false> (optional, true=default)
-   - env=<dev> (optional, dev=default; currently only environment)
+   - browser=\<chrome or msedge>
+   - headless=\<true or false> (optional, true=default)
+   - env=\<dev> (optional, dev=default; currently only environment)
 
 - See buildjar.bat for building a complete jar file, which can be used for running the tests
 
