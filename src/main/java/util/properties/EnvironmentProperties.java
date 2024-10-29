@@ -1,18 +1,15 @@
 package util.properties;
 
-import util.Environment;
-
 import java.util.Properties;
 
 public class EnvironmentProperties {
 
-    private Environment environment;
-    private Properties properties;
+    private final Properties properties;
 
     private static EnvironmentProperties instance;
 
     private EnvironmentProperties() {
-        environment = SystemProperties.getEnvironment();
+        var environment = SystemProperties.getEnvironment();
         properties = new java.util.Properties();
         try {
             properties.load(this.getClass().getClassLoader().getResourceAsStream("config/" + environment.name() + ".properties"));

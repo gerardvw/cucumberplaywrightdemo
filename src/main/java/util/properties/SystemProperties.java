@@ -1,6 +1,6 @@
 package util.properties;
 
-import util.DriverType;
+import util.BrowserName;
 import util.Environment;
 
 public class SystemProperties {
@@ -13,8 +13,13 @@ public class SystemProperties {
         return (environmentSystemProperty == null) ? Environment.dev : Environment.valueOf(environmentSystemProperty.toLowerCase());
     }
 
-    public static DriverType getDriverType() {
+    public static BrowserName getBrowserName() {
         String browserSystemProperty = System.getProperty("browser");
-        return (browserSystemProperty == null) ? DriverType.chrome : DriverType.valueOf(browserSystemProperty.toLowerCase());
+        return (browserSystemProperty == null) ? BrowserName.chrome : BrowserName.valueOf(browserSystemProperty.toLowerCase());
+    }
+
+    public static boolean getHeadless() {
+        String headlessSystemProperty = System.getProperty("headless");
+        return headlessSystemProperty == null || Boolean.parseBoolean(headlessSystemProperty);
     }
 }

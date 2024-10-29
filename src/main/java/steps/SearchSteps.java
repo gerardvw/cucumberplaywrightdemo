@@ -1,40 +1,47 @@
 package steps;
 
-import io.cucumber.java.en.And;
+import context.SearchContext;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import pages.HomePage;
+
+import pages.ProductsPage;
+import context.ScenarioContext;
+import context.TestContext;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class SearchSteps {
 
-    private HomePage homePage = new HomePage();
-    private int actualItemNumber = -1;
+    private final ProductsPage productsPage;
+    private final SearchContext searchContext;
 
-    @Given("^homepage is opened$")
-    public void homepageIsOpened() {
-        homePage.navigate();
+    public SearchSteps(TestContext testContext, ScenarioContext scenarioContext, SearchContext searchContext) {
+        this.searchContext = searchContext;
+        productsPage = new ProductsPage(testContext.baseUrl, scenarioContext.page);
+    }
+
+    @Given("^products page is opened$")
+    public void productsPageIsOpened() {
+        productsPage.navigate();
     }
 
     @When("^I search for (.*)$")
     public void iSearchFor(String searchTerm) {
-        homePage.searchFor(searchTerm);
+        productsPage.searchFor().fill(searchTerm);
+        productsPage.submit().click();
     }
 
-    @And("^I choose to view the search results for being viewed in a list$")
-    public void iChooseToViewTheSearchResultsForBeingViewedInAList() {
-        homePage.selectResultsInAList();
-    }
+    @Then("^I should see an item with description (.*) and a price of (.*)$")
+    public void iShouldSeeAnItemWithDescriptionAndAPriceOf(String expectedDescription, String expectedPrice) {
+        searchContext.productInfo = productsPage.productInfo(expectedDescription, expectedPrice);
 
-    @Then("^I should see an item with description (.*) and a price of (.*) and availability (In stock|Not in stock)$")
-    public void iShouldSeeAnItemWithDescriptionAndAPriceOf(String expectedDescription, String expectedPrice, String expectedAvailability) {
-        actualItemNumber = homePage.getItemNumberFromSearchResultList(expectedDescription, expectedAvailability, expectedPrice);
-        Assert.assertTrue("Item not found.", actualItemNumber > -1);
+        assertThat(searchContext.productInfo.self).isVisible();
     }
 
     @And("^it should be possible to add this item to my cart$")
     public void itShouldBePossibleToAddThisItemToMyCart() {
-        Assert.assertTrue("AddToCart not available.", homePage.addToCartIsAvailable(actualItemNumber));
+        assertThat(searchContext.productInfo.addToCart()).isEnabled();
     }
 }

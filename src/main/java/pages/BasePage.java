@@ -1,23 +1,22 @@
 package pages;
 
-import org.openqa.selenium.support.PageFactory;
-import util.drivermanagers.DriverManager;
-import util.properties.EnvironmentProperties;
+import com.microsoft.playwright.*;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class BasePage {
 
-    public BasePage() {
-        PageFactory.initElements(DriverManager.getWebdriver(), this);
-    }
-
-    public void navigate() {
-        DriverManager.getWebdriver().navigate().to(EnvironmentProperties.getBaseUrl() + getRelativeUrl());
-        waitUntilPageIsLoaded();
-    }
+    protected String baseUrl;
+    protected Page page;
 
     protected abstract String getRelativeUrl();
 
-    protected void waitUntilPageIsLoaded() {
-        //TODO: generic wait for all pages, for example wait until javascript, jquery, angular, etc. is ready when used
+    public BasePage(String baseUrl, Page page)
+    {
+        this.baseUrl = baseUrl;
+        this.page = page;
+    }
+
+    public void navigate() {
+        page.navigate(String.format(StringUtils.stripEnd(baseUrl, "/"),getRelativeUrl()));
     }
 }
