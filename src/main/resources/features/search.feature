@@ -3,7 +3,7 @@ Feature: search
     Background:
         Given products page is opened
 
-    @chrome @ie
+    @chrome @msedge
     Scenario Outline: search for item in searchbox
     When I search for <searchterm>
     Then I should see an item with description <description> and a price of <price>

@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import org.junit.Assert;
 import pages.ProductsPage;
 import context.ScenarioContext;
 import context.TestContext;
@@ -24,7 +25,10 @@ public class SearchSteps {
 
     @Given("^products page is opened$")
     public void productsPageIsOpened() {
-        productsPage.navigate();
+        var response= productsPage.navigate();
+        Assert.assertTrue("Response status code should be Ok", response.ok());
+
+        productsPage.acceptConsentIfVisible();
     }
 
     @When("^I search for (.*)$")
