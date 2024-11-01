@@ -33,8 +33,7 @@ public class SearchSteps {
 
     @When("^I search for (.*)$")
     public void iSearchFor(String searchTerm) {
-        productsPage.searchFor().fill(searchTerm);
-        productsPage.submit().click();
+        productsPage.searchForItem(searchTerm);
     }
 
     @Then("^I should see an item with description (.*) and a price of (.*)$")

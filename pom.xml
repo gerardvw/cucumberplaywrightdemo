@@ -17,66 +17,47 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
+    <!-- include dependencies in jar, so don't scope them to test like this -->
+    <!--<scope>test</scope>-->
     <dependencies>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
-            <!-- include dependency in jar, so don't scope this to test -->
-            <!--<scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-core</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
-        <!-- cucumber-java test dependencies -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
-            <!-- include dependency in jar, so don't scope this to test -->
-            <!--<scope>test</scope>-->
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <!-- include dependency in jar, so don't scope this to test -->
-            <!--<scope>test</scope>-->
         </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>2.28.2</version>
-            <!-- include dependency in jar, so don't scope this to test -->
-            <!--<scope>test</scope>-->
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.mockito</groupId>-->
+<!--            <artifactId>mockito-core</artifactId>-->
+<!--            <version>2.28.2</version>-->
+<!--            &lt;!&ndash; include dependency in jar, so don't scope this to test &ndash;&gt;-->
+<!--            &lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
-
-<!--
-        <dependency>
-            <groupId>org.picocontainer</groupId>
-            <artifactId>picocontainer</artifactId>
-            <version>2.15</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apiguardian</groupId>
-            <artifactId>apiguardian-api</artifactId>
-            <version>1.1.2</version>
-        </dependency>
--->
         <dependency>
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
             <version>1.45.1</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>

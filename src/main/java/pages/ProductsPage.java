@@ -14,12 +14,17 @@ public class ProductsPage extends BasePage {
         return "/products";
     }
 
-    public Locator searchFor(){
+    private Locator searchFor(){
         return page.locator("#search_product");
     }
 
-    public Locator submit() {
+    private Locator submit() {
         return page.locator("#submit_search");
+    }
+
+    public void searchForItem(String searchTerm) {
+        searchFor().fill(searchTerm);
+        submit().click();
     }
 
     public ProductInfo productInfo(String expectedDescription, String expectedPrice) {

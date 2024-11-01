@@ -1,15 +1,15 @@
 # Demo project to show simple Cucumber scenario's using Playwright and Java
   
 Subjects which are covered in this demo project:
-- Basic concept of feature and scenario by wallet feature
-- PageObjects, using Playwright to implement these 
-- Running scenario's in parallel by using multiple threads
-- Running scenario's in a thread-safe way
-- Building a complete artifact (jar file) for running tests from commandline with java
-- Running scenario's from commandline with java, parametrized by browser and environment
-- Filtering scenario's, by browser
-- Creating a json file with test output, which can be used for reporting
-- Screenshot is added to report in case of failure in scenario
+1. [x] Basic concept of feature and scenario by wallet feature
+2. [x] PageObjects, using Playwright to implement these
+3. [x] Running features in parallel by using multiple threads
+4. [x] Running features in a thread-safe way
+5. [x] Building a complete artifact (jar file) for running tests from commandline with java
+6. [x] Running scenario's from commandline with java, parameterized by browser, headless, environment
+7. [x] Filtering scenario's, by browser
+8. [x] Creating a json file with test output, which can be used for reporting
+9. [x] Screenshot is added to report in case of failure in scenario
 
 
 https://automationexercise.com is used as test website for this
