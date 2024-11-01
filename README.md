@@ -2,7 +2,7 @@
   
 Subjects which are covered in this demo project:
 1. [x] Basic concept of feature and scenario by wallet feature
-2. [x] PageObjects, using Playwright to implement these
+2. [x] Checking UI of webapp, using PageObjects and Playwright
 3. [x] Running features in parallel by using multiple threads
 4. [x] Running features in a thread-safe way
 5. [x] Building a complete artifact (jar file) for running tests from commandline with java
@@ -10,6 +10,7 @@ Subjects which are covered in this demo project:
 7. [x] Filtering scenario's, by browser
 8. [x] Creating a json file with test output, which can be used for reporting
 9. [x] Screenshot is added to report in case of failure in scenario
+10. [ ] Checking API, using Playwright  
 
 
 https://automationexercise.com is used as test website for this
