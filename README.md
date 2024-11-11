@@ -27,4 +27,4 @@ Running from commandline:
 - See buildjar.bat for building a complete jar file, which can be used for running the tests
 
 - See runtests.bat how tests can be started using the complete jar file, including multi-threads and filtering by tags
-  E.g. 'runtests chrome'
+  E.g. runtests chrome "@chrome or @api"
