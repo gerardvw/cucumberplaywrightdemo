@@ -15,20 +15,22 @@ public class Hooks {
     private final ScenarioContext scenarioContext;
     private final TestContext testContext;
 
-    private final BrowserInstance BrowserInstance = new BrowserInstance();
+    private BrowserInstance BrowserInstance;
+    private ApiInstance ApiInstance;
 
     public Hooks(TestContext testContext, ScenarioContext scenarioContext) {
         this.testContext = testContext;
         this.scenarioContext = scenarioContext;
     }
 
-    @Before
+    @Before(value="@chrome or @msedge")
     public void beforeScenario(){
         try {
             this.testContext.baseUrl = EnvironmentProperties.getBaseUrl();
             this.testContext.browserName = SystemProperties.getBrowserName().toString();
             this.testContext.headless = SystemProperties.getHeadless();
 
+            BrowserInstance = new BrowserInstance();
             BrowserInstance.setup(this.testContext.browserName, this.testContext.headless);
             this.scenarioContext.page = BrowserInstance.page;
         }
@@ -38,7 +40,21 @@ public class Hooks {
         }
     }
 
-    @After
+    @Before(value="@api")
+    public void beforeScenarioApi(){
+        try {
+            ApiInstance = new ApiInstance();
+            ApiInstance.setup(EnvironmentProperties.getBaseUrl());
+
+            this.scenarioContext.requestContext = ApiInstance.ApiRequestContext;
+        }
+        catch (Exception exception) {
+            System.err.println(exception.getMessage());
+            throw exception;
+        }
+    }
+
+    @After(value="@chrome or @msedge")
     public void afterScenario(Scenario scenario) {
         try {
             if (scenario.isFailed()) {
@@ -54,6 +70,14 @@ public class Hooks {
         }
         finally {
             BrowserInstance.teardown();
+        }
+    }
+
+    @After(value="@api")
+    public void afterScenarioApi(Scenario scenario) {
+        if (ApiInstance.ApiRequestContext != null) {
+            ApiInstance.ApiRequestContext.dispose();
+            ApiInstance.ApiRequestContext = null;
         }
     }
 }

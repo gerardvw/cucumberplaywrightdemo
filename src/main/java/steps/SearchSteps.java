@@ -17,10 +17,12 @@ public class SearchSteps {
 
     private final ProductsPage productsPage;
     private final SearchContext searchContext;
+    private final ScenarioContext scenarioContext;
 
     public SearchSteps(TestContext testContext, ScenarioContext scenarioContext, SearchContext searchContext) {
         this.searchContext = searchContext;
-        productsPage = new ProductsPage(testContext.baseUrl, scenarioContext.page);
+        this.scenarioContext = scenarioContext;
+        productsPage = new ProductsPage(testContext.baseUrl,this.scenarioContext.page);
     }
 
     @Given("^products page is opened$")
