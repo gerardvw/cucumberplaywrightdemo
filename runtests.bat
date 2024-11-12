@@ -1,1 +1,1 @@
-java -Dbrowser=%1 -Denv=dev -jar .\target\playwrightdemo-0.0.1-jar-with-dependencies.jar --threads 2 classpath:features --glue steps --plugin json:cucumber.json --plugin html:cucumber.html --plugin timeline:. --tags %2
+java -Dbrowser=%1 -Denv=dev -jar .\target\playwrightdemo-0.0.1-jar-with-dependencies.jar --threads 3 classpath:features --glue steps --plugin json:.\target\report\cucumber.json --plugin html:.\target\report\cucumber.html --plugin timeline:.\target\report\timeline --tags %2
