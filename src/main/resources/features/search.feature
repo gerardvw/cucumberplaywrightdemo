@@ -4,7 +4,7 @@ Feature: search
     I want be able to search for products
     So that I can order the ones I like
 
-    @chrome
+    @chrome @msedge
     Scenario Outline: search for a product
     Given products page is opened
     When I search for <searchterm>
