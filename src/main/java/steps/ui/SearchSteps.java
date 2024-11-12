@@ -1,4 +1,4 @@
-package steps;
+package steps.ui;
 
 import context.SearchContext;
 import io.cucumber.java.en.Given;

@@ -14,11 +14,11 @@ import java.util.HashMap;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-public class ApiSearchSteps {
+public class SearchSteps {
     private final ScenarioContext scenarioContext;
     private final SearchContext searchContext;
 
-    public ApiSearchSteps(TestContext testContext, ScenarioContext scenarioContext, SearchContext searchContext) {
+    public SearchSteps(TestContext testContext, ScenarioContext scenarioContext, SearchContext searchContext) {
         this.scenarioContext = scenarioContext;
         this.searchContext = searchContext;
     }

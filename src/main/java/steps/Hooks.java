@@ -74,7 +74,7 @@ public class Hooks {
     }
 
     @After(value="@api")
-    public void afterScenarioApi(Scenario scenario) {
+    public void afterScenarioApi() {
         if (ApiInstance.ApiRequestContext != null) {
             ApiInstance.ApiRequestContext.dispose();
             ApiInstance.ApiRequestContext = null;
