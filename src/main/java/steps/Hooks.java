@@ -27,11 +27,10 @@ public class Hooks {
     public void beforeScenario(){
         try {
             this.testContext.baseUrl = EnvironmentProperties.getBaseUrl();
-            this.testContext.browserName = SystemProperties.getBrowserName().toString();
-            this.testContext.headless = SystemProperties.getHeadless();
 
             BrowserInstance = new BrowserInstance();
-            BrowserInstance.setup(this.testContext.browserName, this.testContext.headless);
+            BrowserInstance.setup(SystemProperties.getBrowserName().toString(), SystemProperties.getHeadless());
+
             this.scenarioContext.page = BrowserInstance.page;
         }
         catch (Exception exception) {

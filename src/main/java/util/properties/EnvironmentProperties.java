@@ -25,6 +25,7 @@ public class EnvironmentProperties {
         return instance.properties.getProperty(key);
     }
 
+    //TODO: remove or reuse
     public static Long getTimeoutInSeconds() {
         return Long.parseLong(getProperty("timeoutinseconds"));
     }
