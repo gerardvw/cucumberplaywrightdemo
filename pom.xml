@@ -40,14 +40,6 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.mockito</groupId>-->
-<!--            <artifactId>mockito-core</artifactId>-->
-<!--            <version>2.28.2</version>-->
-<!--            &lt;!&ndash; include dependency in jar, so don't scope this to test &ndash;&gt;-->
-<!--            &lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
