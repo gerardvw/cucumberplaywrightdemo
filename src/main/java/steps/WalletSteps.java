@@ -3,7 +3,8 @@ package steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WalletSteps {
     private int totalDollars;
@@ -20,6 +21,6 @@ public class WalletSteps {
 
     @Then("^my wallet should have (\\d+) dollar$")
     public void myWalletShouldHaveDollar(int dollarsExpected) {
-        Assert.assertEquals(dollarsExpected, totalDollars);
+        assertThat(totalDollars).isEqualTo(dollarsExpected);
     }
 }

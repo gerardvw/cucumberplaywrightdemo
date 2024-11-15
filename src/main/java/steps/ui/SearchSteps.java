@@ -1,17 +1,16 @@
 package steps.ui;
 
+import context.ScenarioContext;
 import context.SearchContext;
-import io.cucumber.java.en.Given;
+import context.TestContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import org.junit.Assert;
 import pages.ProductsPage;
-import context.ScenarioContext;
-import context.TestContext;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchSteps {
 
@@ -28,7 +27,7 @@ public class SearchSteps {
     @Given("^products page is opened$")
     public void productsPageIsOpened() {
         var response= productsPage.navigate();
-        Assert.assertTrue("Response status code should be Ok", response.ok());
+        assertThat(response.ok()).isTrue();
 
         productsPage.acceptConsentIfVisible();
     }
